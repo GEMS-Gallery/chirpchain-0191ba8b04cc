@@ -5,19 +5,31 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import HomeIcon from '@mui/icons-material/Home';
+import { styled } from '@mui/material/styles';
+
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.text.primary,
+  boxShadow: 'none',
+  borderBottom: `1px solid ${theme.palette.divider}`,
+}));
+
+const StyledIconButton = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.primary.main,
+}));
 
 const Header: React.FC = () => {
   return (
-    <AppBar position="static">
+    <StyledAppBar position="static">
       <Toolbar>
-        <IconButton edge="start" color="inherit" component={Link} to="/">
+        <StyledIconButton edge="start" component={Link} to="/">
           <HomeIcon />
-        </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Twitter Clone
+        </StyledIconButton>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, fontWeight: 600 }}>
+          Modern Twitter Clone
         </Typography>
       </Toolbar>
-    </AppBar>
+    </StyledAppBar>
   );
 };
 

@@ -2,7 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, CircularProgress, Card, CardContent, CardActions, IconButton } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { styled } from '@mui/material/styles';
 import { backend } from '../../declarations/backend';
+
+const StyledContainer = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(4),
+  paddingBottom: theme.spacing(4),
+}));
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  marginTop: theme.spacing(3),
+}));
 
 interface Post {
   id: string;
@@ -50,18 +60,26 @@ const PostPage: React.FC = () => {
   };
 
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <StyledContainer maxWidth="sm">
+        <CircularProgress />
+      </StyledContainer>
+    );
   }
 
   if (!post) {
-    return <Typography>Post not found</Typography>;
+    return (
+      <StyledContainer maxWidth="sm">
+        <Typography>Post not found</Typography>
+      </StyledContainer>
+    );
   }
 
   return (
-    <Container maxWidth="sm">
-      <Card>
+    <StyledContainer maxWidth="sm">
+      <StyledCard>
         <CardContent>
-          <Typography variant="h6" component="h2" gutterBottom>
+          <Typography variant="h6" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
             @{post.authorId}
           </Typography>
           <Typography variant="body1" paragraph>
@@ -77,8 +95,8 @@ const PostPage: React.FC = () => {
           </IconButton>
           <Typography variant="caption">{post.likes.length} likes</Typography>
         </CardActions>
-      </Card>
-    </Container>
+      </StyledCard>
+    </StyledContainer>
   );
 };
 

@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, CircularProgress } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import PostForm from '../components/PostForm';
 import PostList from '../components/PostList';
 import { backend } from '../../declarations/backend';
+
+const StyledContainer = styled(Container)(({ theme }) => ({
+  paddingTop: theme.spacing(4),
+  paddingBottom: theme.spacing(4),
+}));
 
 const HomePage: React.FC = () => {
   const [posts, setPosts] = useState<any[]>([]);
@@ -41,8 +47,8 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h4" component="h1" gutterBottom>
+    <StyledContainer maxWidth="sm">
+      <Typography variant="h4" component="h1" gutterBottom sx={{ fontWeight: 700 }}>
         Home
       </Typography>
       <PostForm onPostCreated={handlePostCreated} />
@@ -51,7 +57,7 @@ const HomePage: React.FC = () => {
       ) : (
         <PostList posts={posts} onLike={handleLike} />
       )}
-    </Container>
+    </StyledContainer>
   );
 };
 

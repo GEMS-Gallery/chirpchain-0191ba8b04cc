@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import { TextField, Button, Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { backend } from '../../declarations/backend';
+
+const StyledForm = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+  borderRadius: theme.shape.borderRadius,
+  padding: theme.spacing(3),
+  marginBottom: theme.spacing(3),
+  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  marginTop: theme.spacing(2),
+}));
 
 interface PostFormProps {
   onPostCreated: () => void;
@@ -31,7 +44,7 @@ const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ mb: 2 }}>
+    <StyledForm component="form" onSubmit={handleSubmit}>
       <TextField
         fullWidth
         multiline
@@ -42,16 +55,15 @@ const PostForm: React.FC<PostFormProps> = ({ onPostCreated }) => {
         onChange={(e) => setContent(e.target.value)}
         disabled={isLoading}
       />
-      <Button
+      <StyledButton
         type="submit"
         variant="contained"
         color="primary"
         disabled={!content.trim() || isLoading}
-        sx={{ mt: 1 }}
       >
         {isLoading ? 'Posting...' : 'Post'}
-      </Button>
-    </Box>
+      </StyledButton>
+    </StyledForm>
   );
 };
 
