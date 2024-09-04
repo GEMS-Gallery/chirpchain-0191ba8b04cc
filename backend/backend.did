@@ -1,0 +1,38 @@
+type UserProfile = 
+ record {
+   bio: text;
+   id: text;
+   username: text;
+ };
+type Time = int;
+type Result_2 = 
+ variant {
+   err: text;
+   ok: Post;
+ };
+type Result_1 = 
+ variant {
+   err: text;
+   ok: UserProfile;
+ };
+type Result = 
+ variant {
+   err: text;
+   ok: bool;
+ };
+type Post = 
+ record {
+   authorId: text;
+   content: text;
+   createdAt: Time;
+   id: text;
+   likes: vec text;
+ };
+service : {
+  createPost: (text, text) -> (Result_2);
+  createUserProfile: (text, text, text) -> (Result_1);
+  getPost: (text) -> (opt Post) query;
+  getPosts: () -> (vec Post) query;
+  getUserProfile: (text) -> (opt UserProfile) query;
+  likePost: (text, text) -> (Result);
+}
